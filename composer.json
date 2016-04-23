@@ -1,4 +1,16 @@
 {
+	"name": "phillipjackson/palamon",
+    "description": "PHP Package to communicate with Bungie's Public API for Destiny",
+    "keywords": ["Bungie", "Destiny", "API"],
+    "license" : "",
+    "authors" : [
+        {
+            "name": "Phillip Jackson",
+            "email": "unisys12@gmail.com",
+            "homepage": "none",
+            "Gamer Tag": "unisys12"
+        }
+    ],
     "require": {
         "guzzlehttp/guzzle": "^6.2",
         "vlucas/phpdotenv": "^2.2"
