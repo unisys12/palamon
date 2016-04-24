@@ -107,7 +107,7 @@ Now, you have an array containing all the current Grimoire. From here, you can i
 ```
 
 ####Manifest Example
-Let's say, you want to everything currently in the database... ok... umm... yeah... Well, to do that, just - 
+Let's say, you want to download everything currently in the database... ok... umm... yeah... Well, to do that, just - 
 
 ```php
 <?php
