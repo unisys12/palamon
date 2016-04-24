@@ -77,13 +77,14 @@ Now, you have an array containing all the current Grimoire. From here, you can i
 			font-family: arial;
 		}
 
-		<?php 
-		foreach($themes as $card){
+	<?php 
+	// Probably not the best way to go about this, but...
+	foreach($themes as $card){
 		.card, #{{ $card['themeId'] }}  {		
 			background-position: {{ $card['normalResolution']['image']['rect']['x'] }}px {{ $card['normalResolution']['image']['rect']['y'] }}px;
 		}
-		}
-		?>
+	}
+	?>
 	</style>
 </head>
 <body>
@@ -96,7 +97,9 @@ Now, you have an array containing all the current Grimoire. From here, you can i
 			<h3>{{ $card['themeName'] }}</h3>
 		</header>
 	</div>
+
 	}
+	<?php
 </div>
 </body>
 </html>
