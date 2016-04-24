@@ -6,9 +6,7 @@
     "authors" : [
         {
             "name": "Phillip Jackson",
-            "email": "unisys12@gmail.com",
-            "homepage": "none",
-            "Gamer Tag": "unisys12"
+            "email": "unisys12@gmail.com"
         }
     ],
     "require": {
@@ -17,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Palamon\\": "src/"
+            "palamon\\": "src/"
         }
     }
 }
