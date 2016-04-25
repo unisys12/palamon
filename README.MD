@@ -125,4 +125,4 @@ $request = new Manifest();
 
 $request->downloadMobileWorldContents();
 ```
-Within the root of your project, a new `/cache` directory will be created, if one doesn't already exit. Within this directory will be a pretty large `content` file that you can open with a SQLite Viewer and browse the full contents of the database. Please note that the database will contain JSON, not what you are probably expecting. Think of it as, a local API result. 
+Within the root of your project, a new `/cache` directory will be created, if one doesn't already exsit. Within this directory will be a pretty large `content` file that you can open with a SQLite Viewer and browse the full contents of the database. Please note that the database will contain JSON, not what you are probably expecting. Think of it as, a local API result. 
