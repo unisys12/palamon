@@ -169,14 +169,12 @@ $item = $request->getSingleItem($key);
 	</head>
 	<body>
 		<div class="item-example">
-			```php
 			<?php 
 			
 				echo "<h1>" . $item['Response']['data']['inventoryItem']['itemName'] . "</h1>";
 				echo "<div class='item-description'><h5>" . $item['Response']['data']['inventoryItem']['itemDescription'] . "</h5></div>";
 				echo "<img src=http://www.bungie.net" . $item['Response']['data']['inventoryItem']['icon'] . "/>";
 			?>
-			```
 			<div>Very poor example... I will admit that... </div>
 		</div>
 	</body>
