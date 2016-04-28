@@ -125,4 +125,60 @@ $request = new Manifest();
 
 $request->downloadMobileWorldContents();
 ```
-Within the root of your project, a new `/cache` directory will be created, if one doesn't already exsit. Within this directory will be a pretty large `content` file that you can open with a SQLite Viewer and browse the full contents of the database. Please note that the database will contain JSON, not what you are probably expecting. Think of it as, a local API result. 
+Within the root of your project, a new `/cache` directory will be created, if one doesn't already exsit. Within this directory will be a pretty large `content` file that you can open with a SQLite Viewer and browse the full contents of the database. Please note that the database will contain an `id` column along with a `Blob` column which contains JSON, not what you are probably expecting. Think of it as, a local API result. 
+
+####Items Example
+So, let's say you want to display an item from the Armory or from a Vendor. To do that, you can use the Item Class, like so... 
+
+```php
+<?php
+
+// Load Composer Dependenices
+require __DIR__ . '/vendor/autoload.php';
+
+use \palamon\Requests\Items;
+
+// Load DotEnv to handle Enviroment Variables
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
+$request = new Items();
+
+$key = '4028115470';
+
+$item = $request->getSingleItem($key);
+?>
+```
+```html
+<html>
+	<head>
+		<title>Palamon Item Example</title>
+		<style>
+		.item-example {
+		
+		}
+		.item-example>h1 {
+			margin-bottom: 0;
+		}
+
+		.item-description>h5 {
+			margin-top: 0;
+			padding: 0;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="item-example">
+			```php
+			<?php 
+			
+				echo "<h1>" . $item['Response']['data']['inventoryItem']['itemName'] . "</h1>";
+				echo "<div class='item-description'><h5>" . $item['Response']['data']['inventoryItem']['itemDescription'] . "</h5></div>";
+				echo "<img src=http://www.bungie.net" . $item['Response']['data']['inventoryItem']['icon'] . "/>";
+			?>
+			```
+			<div>Very poor example... I will admit that... </div>
+		</div>
+	</body>
+</html>
+```
