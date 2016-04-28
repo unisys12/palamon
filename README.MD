@@ -128,7 +128,7 @@ $request->downloadMobileWorldContents();
 Within the root of your project, a new `/cache` directory will be created, if one doesn't already exsit. Within this directory will be a pretty large `content` file that you can open with a SQLite Viewer and browse the full contents of the database. Please note that the database will contain an `id` column along with a `Blob` column which contains JSON, not what you are probably expecting. Think of it as, a local API result. 
 
 ####Items Example
-So, let's say you want to display an item from the Armory or from a Vendor. To do that, you can use the Item Class, like so... 
+So, let's say you want to display an single item from the Armory or from a Vendor. To do that, you can use the `getSingleItem` method from the Item Class, like so... 
 
 ```php
 <?php
@@ -180,3 +180,31 @@ $item = $request->getSingleItem($key);
 	</body>
 </html>
 ```
+
+So, I know what your asking? *"Where the hell did you get the key from?"*. I gotcha! Well, to retrieve all the keys listed currently within the database, simple use the `getAllItems()` method, like so...
+
+```php
+$request = new Items();
+
+$items = $request->getAllItems();
+
+while ($items['Response']['data']['hasMore'] === TRUE) {
+	foreach ($items['Response']['data']['itemHashes'] as $item) {
+		echo "<ul>";
+		echo "<li>" . $item . "</li>";
+		echo "</ul>";
+	}
+}
+```
+
+All this will really do is display all the item hashes, which really doesn't do us a whole lot of good. What can do though is pass a parameter through to the method called 'definitions' and set it to TRUE. 
+
+```php
+$request = new Items();
+
+$items = $request->getAllItems('definitions=true');
+
+var_dump($items);
+```
+
+This will give you a really good idea of what is included, which is a lot so... 
