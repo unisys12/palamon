@@ -233,3 +233,25 @@ echo "<p><b>" . count($talents['Response']['data']['stepHashes']) . "</b> out of
 
 But as you can see, this will only return a list of hashes. Not of great use. As with most of these, there are several Url Parameters we can pass to the method which will give us a bit more information. Like, so:
 
+```php
+use \palamon\Requests\TalentNodes;
+
+$request = new TalentNodes();
+
+$talents = $request->getTalentNodes('definitions=true');
+
+echo "<h3>Talent Nodes</h3>";
+var_dump($talents);
+
+echo "<dl>";
+foreach ($talents['Response']['data']['stepHashes'] as $talent) {
+	$talentHash = $talent;
+};
+
+foreach ($talents['Response']['definitions']['nodeSteps'] as $def){
+	echo "<dt>" . $talentHash . " - " . "<strong>" . $def['nodeStepName'] . "</strong>";
+	echo "<dd>" . $def['nodeStepDescription'];
+};
+
+echo "<p><b>" . count($talents['Response']['data']['stepHashes']) . "</b> out of <b>" . $talents['Response']['data']['totalResults'] . "</b></p>";
+```
