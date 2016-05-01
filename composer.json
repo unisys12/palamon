@@ -10,9 +10,7 @@
         }
     ],
     "require": {
-        "guzzlehttp/guzzle": "^6.2"
-    },
-    "require-dev": {
+        "guzzlehttp/guzzle": "^6.2",
         "vlucas/phpdotenv": "^2.2"
     },
     "autoload": {
