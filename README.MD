@@ -20,8 +20,7 @@ To use this package, simple download it _(currently not on Packagist)_ from gith
 BUNGIE_KEY="Your Personal Bungie X-API-KEY Goes Here!"
 
 ``` 
-
-I hope to auto-generate this for you, from which you would only have to enter your X-API-KEY, but... that's for another day. From here, you should be good to go. Bear in mind, I am still working on this, so... take it with a grain of salt.
+From here, you should be good to go. Bear in mind, I am still working on this, so... take it with a grain of salt.
 
 ####Grimoire Example
 ```php
