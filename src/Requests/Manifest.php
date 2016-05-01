@@ -6,11 +6,13 @@ use \ZipArchive;
 
 class Manifest {
 
+	const ManifestURL = "http://www.bungie.net/Platform/Destiny/Manifest/";
+
      public function checkManifest()
     {
 
     	$client = new \GuzzleHttp\Client(['headers' => ['X-API-KEY' => $_ENV['BUNGIE_KEY']]]);
-		$req = $client->request('GET', $_ENV['BUNGIE_MANIFEST_URL']);
+		$req = $client->request('GET', self::ManifestURL);
 		$res = json_decode($req->getBody(), true);
 
 		$version = $res['Response']['version'];
@@ -23,7 +25,7 @@ class Manifest {
     {
 
     	$client = new \GuzzleHttp\Client(['headers' => ['X-API-KEY' => $_ENV['BUNGIE_KEY']]]);
-		$req = $client->request('GET', $_ENV['BUNGIE_MANIFEST_URL']);
+		$req = $client->request('GET', self::ManifestURL);
 		$res = json_decode($req->getBody(), true);
 
 		return $res;
