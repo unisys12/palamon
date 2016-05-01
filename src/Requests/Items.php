@@ -4,20 +4,12 @@ namespace palamon\Requests;
 
 class Items {
 
-	public function getAllItems(){
-
-		$client = new \GuzzleHttp\Client(['headers' => ['X-API-KEY' => $_ENV['BUNGIE_KEY']]]);
-		$req = $client->request('GET', $_ENV['BUNGIE_ITEMS_URL']);
-		$res = json_decode($req->getBody(), true);
-
-		return $res;
-
-	}
+	const ItemsURL = "http://www.bungie.net/Platform/Destiny/Explorer/Items";
 
 	public function getAllItems($parms){
 
 		$client = new \GuzzleHttp\Client(['headers' => ['X-API-KEY' => $_ENV['BUNGIE_KEY']]]);
-		$req = $client->request('GET', $_ENV['BUNGIE_ITEMS_URL'] . '?' . $parms);
+		$req = $client->request('GET', isset($params) ? self::ItemsURL . "?" . $params : self::ItemsURL);
 		$res = json_decode($req->getBody(), true);
 
 		return $res;
