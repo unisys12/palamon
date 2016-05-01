@@ -208,3 +208,28 @@ var_dump($items);
 ```
 
 This will give you a really good idea of what is included, which is a lot so... 
+
+####Talent Node Example
+To access a list of all the Talent Nodes, you could do the following:
+
+```php
+use \palamon\Requests\TalentNodes;
+
+$request = new TalentNodes();
+
+$talents = $request->getTalentNodes();
+
+echo "<h3>Talent Nodes</h3>";
+var_dump($talents);
+
+echo "<ul>";
+foreach ($talents['Response']['data']['stepHashes'] as $talent) {
+	echo "<li>" . $talent . "</li>";
+};
+echo "</ul>";
+
+echo "<p><b>" . count($talents['Response']['data']['stepHashes']) . "</b> out of <b>" . $talents['Response']['data']['totalResults'] . "</b></p>";
+```
+
+But as you can see, this will only return a list of hashes. Not of great use. As with most of these, there are several Url Parameters we can pass to the method which will give us a bit more information. Like, so:
+
