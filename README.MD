@@ -10,7 +10,18 @@ The goal of this package is to create a very simple to use interface with Bungie
 Currently, it only contains methods to retrieve the Destiny manifest, download the Mobile World Contents database script and the entire Grimoire. As mentioned above, there is more to come. 
 
 ###Useage
-To use this package, simple download it _(currently not on Packagist)_ from github or fetch it into your project. Run `composer update` to install dependencies. 
+To use this package, simple download it _(currently not on Packagist)_ from github or fetch it into your project. Run `composer update` to install dependencies. Next, create a `.env` file in the root of the project and place your `X-API-KEY` within it, like so...
+
+```shell
+# 
+# Bungie Destiny Environment Variables
+#
+
+BUNGIE_KEY="Your Personal Bungie X-API-KEY Goes Here!"
+
+``` 
+
+I hope to auto-generate this for you, from which you would only have to enter your X-API-KEY, but... that's for another day. From here, you should be good to go. Bear in mind, I am still working on this, so... take it with a grain of salt.
 
 ####Grimoire Example
 ```php
