@@ -1,18 +1,18 @@
 <?php
-
 namespace palamon\Requests;
 
 use \ZipArchive;
 
-class Manifest {
+class Manifest
+{
 
-	const ManifestURL = "http://www.bungie.net/Platform/Destiny/Manifest/";
+	const MANIFEST_URL = "http://www.bungie.net/Platform/Destiny/Manifest/";
 
      public function checkManifest()
     {
 
     	$client = new \GuzzleHttp\Client(['headers' => ['X-API-KEY' => $_ENV['BUNGIE_KEY']]]);
-		$req = $client->request('GET', self::ManifestURL);
+		$req = $client->request('GET', self::MANIFEST_URL);
 		$res = json_decode($req->getBody(), true);
 
 		$version = $res['Response']['version'];
@@ -25,7 +25,7 @@ class Manifest {
     {
 
     	$client = new \GuzzleHttp\Client(['headers' => ['X-API-KEY' => $_ENV['BUNGIE_KEY']]]);
-		$req = $client->request('GET', self::ManifestURL);
+		$req = $client->request('GET', self::MANIFEST_URL);
 		$res = json_decode($req->getBody(), true);
 
 		return $res;
@@ -37,7 +37,7 @@ class Manifest {
 
     	// Retrieve Updated Bungie Destiny Manifest
     	$client = new \GuzzleHttp\Client(['headers' => ['X-API-KEY' => $_ENV['BUNGIE_KEY']]]);
-		$req = $client->request('GET', $_ENV['BUNGIE_MANIFEST_URL']);
+		$req = $client->request('GET', self::MANIFEST_URL);
 		$res = json_decode($req->getBody(), true);
 
 		// Retrieve path to updated contents path
