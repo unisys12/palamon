@@ -1,7 +1,8 @@
 {
 	"name": "phillipjackson/palamon",
     "description": "PHP Package to communicate with Bungie's Public API for Destiny",
-    "keywords": ["Bungie", "Destiny", "API"],
+    "keywords": [
+    "Bungie", "Destiny", "API"],
     "license" : "",
     "authors" : [
         {
@@ -27,5 +28,8 @@
         "psr-4": {
             "palamon\\tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
