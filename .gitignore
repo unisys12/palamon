@@ -1,6 +1,7 @@
 vendor/
 cache/
 build/
+mocks/
 composer.lock
 .env
 index.php
