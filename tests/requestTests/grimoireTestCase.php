@@ -15,9 +15,16 @@ class grimoireTestCase extends \PHPUnit_Framework_TestCase
 	public function testGrimoireResponse()
     {
         
-        $request = new Grimoire('7ced29b9f06844efb9102fbf73218362');
-        $response = $request->getGrimoire();
-        $this->assertArrayHasKey('Response', $response);
+        $mock = new MockHandler([
+            new Response(200, ['X-Ventcore-Status' => '1'])
+        ]);
+
+        $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);
+
+        $statusCodeCheck = $client->request('GET', 'http://www.bungie.net/Platform/Destiny/Vanguard/Grimoire/Definition/')->getStatusCode();
+
+        $this->assertEquals('200', $statusCodeCheck);
 
     }
 
