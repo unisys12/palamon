@@ -119,15 +119,24 @@ class Manifest
     // }
 
     /**
+     * Get the current SQLite3 Content Path
+     * 
+     * @return string
+     */
+    private function _getSQLiteContentPath()
+    {
+        $manifest = self::getManifest();
+        return $manifest['Response']['mobileWorldContentPaths'][$this->lang];
+    }
+
+    /**
      * Download MobileWorldContentFile (SQLite)
      *
      * @return resource
      */
     private function _downloadSql()
-    {
-        $manifest = self::getManifest();
-        echo 'Downloading manifest...';
-        $contentPath = $manifest['Response']['mobileWorldContentPaths'][$this->lang];
+    {        
+        $contentPath = self::_getSQLiteContentPath();
 
         // NOTE: Extract our into seperate Service maybe?
         $client = new Client(
