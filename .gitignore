@@ -1,7 +1,9 @@
 vendor/
 cache/
 build/
+storage/
 mocks/
 composer.lock
 .env
 index.php
+*.zip

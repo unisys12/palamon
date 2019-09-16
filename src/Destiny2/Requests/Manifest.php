@@ -142,21 +142,25 @@ class Manifest
         $client = new Client(
             [
                 'base_uri' => 'https://www.bungie.net/Platform/',
-                'headers' => ['X-API-KEY' => $this->key],
+                'headers' => ['X-API-KEY' => getenv('BUNGIE_KEY')],
                 'timeout' => 125
             ]
         );
 
         try {
             $req = $client->get(
-                $contentPath, ['verify' => false, 'progress' => function (
-                    $downloadTotal,
-                    $downloadedBytes
-                ) {
-                    // I can do something with this info!
-                    // echo '<p>Download Total: ' . $downloadTotal . '</p>';
-                    // echo '<p>Download Bytes: ' . $downloadedBytes . '</p>';
-                }]
+                $contentPath, 
+                [
+                    'verify' => false, 
+                    'progress' => function (
+                        $downloadTotal,
+                        $downloadedBytes
+                    ) {
+                        // I can do something with this info!
+                        // echo '<p>Download Total: ' . $downloadTotal . '</p>';
+                        // echo '<p>Download Bytes: ' . $downloadedBytes . '</p>';
+                    }
+                ]
             );
             return $req->getBody();
         } catch (ClientException $ce) {
@@ -168,13 +172,16 @@ class Manifest
 
     /**
      * Extract contents of compressed database
+     * 
+     * @param string $path Path to storage location of extract sqlite db
+     * 
+     * @return void
      */
     private function _extractZip($path)
     {
-        echo "Extracting file from " . $path;
         $zip = new ZipArchive;
         $zip->open($path);
-        $zip->extractTo('../database/');
+        $zip->extractTo('./storage/');
         $zip->close();
     }
 
@@ -183,7 +190,7 @@ class Manifest
      *
      * @return resource
      */
-    public function extractSqlite()
+    public function downloadMobileWorldContents()
     {
         $sql = self::_downloadSql();
         $file = file_put_contents('./destiny2.zip', $sql);
