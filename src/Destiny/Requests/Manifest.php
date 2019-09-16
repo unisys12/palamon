@@ -54,7 +54,7 @@ class Manifest
 		file_put_contents($manifest, $result);
 
 		if ($zip->open($manifest) === TRUE) {
-			$zip->extractTo('./storage/'); // update to directory outside of package
+			$zip->extractTo('./storage/destiny1/'); // update to directory outside of package
 			$zip->close();
 			unlink($manifest);
 		} else {

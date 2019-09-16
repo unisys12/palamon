@@ -181,7 +181,7 @@ class Manifest
     {
         $zip = new ZipArchive;
         $zip->open($path);
-        $zip->extractTo('./storage/');
+        $zip->extractTo('./storage/destiny2/');
         $zip->close();
     }
 
