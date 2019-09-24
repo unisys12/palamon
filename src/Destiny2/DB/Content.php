@@ -7,6 +7,7 @@ use SQLite;
 
 /**
  * Interacts with the decompressed SQLite Database for Destiny 2
+ * AKA Mobile World Content File
  * 
  * @author unisys12 <unisys12@gmail.com>
  */
@@ -19,10 +20,9 @@ class Content
      *
      * @param string $path path to the SQLite DB
      */
-    public function __construct($path)
+    public function __construct(string $path)
     {
         $this->path = $path;
-        // $this->open($this->path);
     }
 
     /**
@@ -32,7 +32,6 @@ class Content
      */
     private function _conn()
     {
-        // SQLite3::open($this->path, SQLITE3_OPEN_READONLY);
         return new PDO('sqlite:' . $this->path);
     }
 
@@ -57,7 +56,8 @@ class Content
     /**
      * Gets the Contents of a single table
      *
-     * @param  string $tableName The name of the table you want to query
+     * @param string $tableName The name of the table you want to query
+     * 
      * @return array
      */
     public function getTableContents($tableName)
@@ -73,6 +73,5 @@ class Content
         return $tableContents;
 
     }
-
 
 }
