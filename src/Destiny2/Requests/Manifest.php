@@ -24,7 +24,7 @@ class Manifest
      * @param integer $key  Your Bungie API Key from ENV
      * @param string  $lang The language you wish to fetch
      */
-    public function __construct($lang) 
+    public function __construct(string $lang) 
     {
         $this->lang = $lang;
     }
@@ -177,7 +177,7 @@ class Manifest
      * 
      * @return void
      */
-    private function _extractZip($path)
+    private function _extractZip(string $path)
     {
         $zip = new ZipArchive;
         $zip->open($path);

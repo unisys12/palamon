@@ -60,7 +60,7 @@ class Content
      * 
      * @return array
      */
-    public function getTableContents($tableName)
+    public function getTableContents(string $tableName)
     {
         $db = self::_conn();
 
