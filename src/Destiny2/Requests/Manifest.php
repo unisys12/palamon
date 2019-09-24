@@ -21,8 +21,7 @@ class Manifest
     /**
      * Requires use of a API Key obtained from Bungie.net
      *
-     * @param integer $key  Your Bungie API Key from ENV
-     * @param string  $lang The language you wish to fetch
+     * @param string $lang The language you wish to fetch
      */
     public function __construct(string $lang) 
     {
