@@ -136,6 +136,7 @@ class Manifest
     private function _downloadSql()
     {        
         $contentPath = self::_getSQLiteContentPath();
+        // $contentPath = "/common/destiny2_content/sqlite/en/world_sql_content_336e2859ed44cbe84441ca18a05a2f35.content";
 
         // NOTE: Extract our into seperate Service maybe?
         $client = new Client(
