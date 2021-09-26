@@ -1,8 +1,8 @@
 <?php
 
-namespace palamon\Tests;
+namespace Palamon\Tests;
 
-use palamon\Enums as Enums;
+use Palamon\Enums as Enums;
 use PHPUnit\Framework\TestCase;
 
 // use PHPUnit\Framework\TestCase;

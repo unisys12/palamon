@@ -1,6 +1,6 @@
 <?php
 
-namespace palamon;
+namespace Palamon;
 
 class Enums
 {

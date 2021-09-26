@@ -1,8 +1,8 @@
 <?php
 
-namespace palamon\tests;
+namespace Palamon\tests;
 
-use palamon\Requests\Grimoire;
+use Palamon\Requests\Grimoire;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;

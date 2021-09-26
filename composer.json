@@ -1,6 +1,7 @@
 {
-    "name": "phillipjackson/palamon",
+    "name": "unisys12/palamon",
     "description": "PHP Package to communicate with Bungie's Public API for Destiny",
+    "type": "library",
     "keywords": [
         "Bungie",
         "Destiny",
@@ -23,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "palamon\\": "src/"
+            "Palamon\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "palamon\\tests\\": "tests/"
+            "Palamon\\tests\\": "tests/"
         }
     },
     "scripts": {

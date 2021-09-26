@@ -1,18 +1,18 @@
 <?php
-namespace palamon\Destiny\Requests;
 
-class Grimoire 
+namespace Palamon\Destiny\Requests;
+
+class Grimoire
 {
 
-	const GRIMOIRE_URL = "https://www.bungie.net/Platform/Destiny/Vanguard/Grimoire/Definition/";
+    const GRIMOIRE_URL = "https://www.bungie.net/Platform/Destiny/Vanguard/Grimoire/Definition/";
 
-	public function getGrimoire()
+    public function getGrimoire()
     {
-    	$client = new \GuzzleHttp\Client(['headers' => ['X-API-KEY' => $_ENV['BUNGIE_KEY']]]);
-		$req = $client->get(self::GRIMOIRE_URL, ['verify' => false]);
-		$res = json_decode($req->getBody(), true);
+        $client = new \GuzzleHttp\Client(['headers' => ['X-API-KEY' => $_ENV['BUNGIE_KEY']]]);
+        $req = $client->get(self::GRIMOIRE_URL, ['verify' => false]);
+        $res = json_decode($req->getBody(), true);
 
-		return $res;
+        return $res;
     }
-
 }
