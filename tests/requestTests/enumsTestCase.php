@@ -3,6 +3,8 @@
 namespace palamon\Tests;
 
 use palamon\Enums as Enums;
+use PHPUnit\Framework\TestCase;
+
 // use PHPUnit\Framework\TestCase;
 
 // class EnumsTestCase extends TestCase
@@ -13,7 +15,7 @@ use palamon\Enums as Enums;
 //     }
 // }
 
-class enumsTestCase extends \PHPUnit_Framework_TestCase
+class enumsTestCase extends TestCase
 {
     public function testBaseUrl()
     {

@@ -1,4 +1,5 @@
 <?php
+
 namespace palamon\tests;
 
 use palamon\Requests\Grimoire;
@@ -8,13 +9,14 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\RequestException;
+use PHPUnit\Framework\TestCase;
 
-class grimoireTestCase extends \PHPUnit_Framework_TestCase
+class grimoireTestCase extends TestCase
 {
 
-	public function testGrimoireResponse()
+    public function testGrimoireResponse()
     {
-        
+
         $mock = new MockHandler([
             new Response(200, ['X-Ventcore-Status' => '1'])
         ]);
@@ -25,7 +27,5 @@ class grimoireTestCase extends \PHPUnit_Framework_TestCase
         $statusCodeCheck = $client->request('GET', 'http://www.bungie.net/Platform/Destiny/Vanguard/Grimoire/Definition/')->getStatusCode();
 
         $this->assertEquals('200', $statusCodeCheck);
-
     }
-
 }
