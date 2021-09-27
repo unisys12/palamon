@@ -2,7 +2,7 @@
 
 namespace Palamon\Destiny\Requests;
 
-use \ZipArchive;
+use ZipArchive;
 
 class Manifest
 {
