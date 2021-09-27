@@ -33,7 +33,7 @@
         }
     },
     "scripts": {
-        "test": "phpunit",
+        "test": "phpunit --testdox",
         "sniff": "./vendor/bin/phpcs --standard=PSR12 src/"
     }
 }
