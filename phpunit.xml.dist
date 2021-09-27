@@ -10,7 +10,7 @@
          stopOnFailure="false">
 	<testsuites>
 		<testsuite name="Palamon Test Suite">
-			<directory suffix=".php">./tests/requestTests/</directory>
+			<directory suffix=".php">./tests/unit/</directory>
 		</testsuite>
 	</testsuites>
     <coverage>
