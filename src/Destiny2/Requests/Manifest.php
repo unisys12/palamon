@@ -31,7 +31,7 @@ class Manifest
     /**
      * Fetches the Destiny 2 Manifest
      *
-     * @return resource The response body of the manifest request
+     * @return array The response body of the manifest request
      */
     public function getManifest()
     {
@@ -59,7 +59,7 @@ class Manifest
     /**
      * Gets the current version of the fetched Manifest
      *
-     * @return integer|null The version of the Manfiest
+     * @return string The version of the Manfiest
      */
     public function getVersion()
     {
@@ -72,7 +72,7 @@ class Manifest
      *
      * @return string
      */
-    private function getJsonWorldContentPaths()
+    public function getJsonWorldContentPaths()
     {
         $manifest = $this->getManifest();
         return $manifest['Response']['jsonWorldContentPaths'][$this->lang];
