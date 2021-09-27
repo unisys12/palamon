@@ -7,7 +7,7 @@ use \ZipArchive;
 class Manifest
 {
 
-    const MANIFEST_URL = "http://www.bungie.net/Platform/Destiny/Manifest/";
+    private const MANIFEST_URL = "http://www.bungie.net/Platform/Destiny/Manifest/";
 
     public function checkManifest()
     {

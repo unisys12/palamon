@@ -5,7 +5,7 @@ namespace Palamon\Destiny\Requests;
 class TalentNodes
 {
 
-    const TALENT_NODES = 'http://www.bungie.net/Platform/Destiny/Explorer/TalentNodeSteps';
+    private const TALENT_NODES = 'http://www.bungie.net/Platform/Destiny/Explorer/TalentNodeSteps';
 
     public function getTalentNodes($params)
     {

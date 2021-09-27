@@ -5,7 +5,7 @@ namespace Palamon\Destiny\Requests;
 class Grimoire
 {
 
-    const GRIMOIRE_URL = "https://www.bungie.net/Platform/Destiny/Vanguard/Grimoire/Definition/";
+    private const GRIMOIRE_URL = "https://www.bungie.net/Platform/Destiny/Vanguard/Grimoire/Definition/";
 
     public function getGrimoire()
     {

@@ -10,20 +10,20 @@ use GuzzleHttp\Exception\ClientException;
 
 /**
  * Handles the Destiny Manifest File
- * 
+ *
  * @author unisys12 <unisys12@gmail.com>
  */
 
 class Manifest
 {
-    const MANIFEST_URL = "Manifest";
+    private const MANIFEST_URL = "Manifest";
 
     /**
      * Requires use of a API Key obtained from Bungie.net
      *
      * @param string $lang The language you wish to fetch
      */
-    public function __construct(string $lang) 
+    public function __construct(string $lang)
     {
         $this->lang = $lang;
     }
@@ -54,7 +54,6 @@ class Manifest
                 return Psr7\str($ce->getResponse());
             }
         }
-
     }
 
     /**
@@ -70,7 +69,7 @@ class Manifest
 
     /**
      * Gets the current JSONContentPath
-     * 
+     *
      * @return string
      */
     private function _getJsonWorldContentPaths()
@@ -81,7 +80,7 @@ class Manifest
 
     /**
      * Download JSONWorldContent
-     * 
+     *
      * @return resource
      */
     // public function downloadJSON()
@@ -114,12 +113,12 @@ class Manifest
     //             return Psr7\str($ce->getResponse());
     //         }
     //     }
-        
+
     // }
 
     /**
      * Get the current SQLite3 Content Path
-     * 
+     *
      * @return string
      */
     private function _getSQLiteContentPath()
@@ -134,7 +133,7 @@ class Manifest
      * @return resource
      */
     private function _downloadSql()
-    {        
+    {
         $contentPath = self::_getSQLiteContentPath();
         // $contentPath = "/common/destiny2_content/sqlite/en/world_sql_content_336e2859ed44cbe84441ca18a05a2f35.content";
 
@@ -149,9 +148,9 @@ class Manifest
 
         try {
             $req = $client->get(
-                $contentPath, 
+                $contentPath,
                 [
-                    'verify' => false, 
+                    'verify' => false,
                     'progress' => function (
                         $downloadTotal,
                         $downloadedBytes
@@ -172,9 +171,9 @@ class Manifest
 
     /**
      * Extract contents of compressed database
-     * 
+     *
      * @param string $path Path to storage location of extract sqlite db
-     * 
+     *
      * @return void
      */
     private function _extractZip(string $path)
@@ -197,6 +196,6 @@ class Manifest
 
         $zip_contents = self::_extractZip('./destiny2.zip');
 
-        return $zip_contents;      
+        return $zip_contents;
     }
 }

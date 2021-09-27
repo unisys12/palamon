@@ -5,7 +5,7 @@ namespace Palamon\Destiny\Requests;
 class Stats
 {
 
-    const STATS_URL = "http://www.bungie.net/Platform/Destiny/Stats/Definition/";
+    private const STATS_URL = "http://www.bungie.net/Platform/Destiny/Stats/Definition/";
 
     public function getStats()
     {

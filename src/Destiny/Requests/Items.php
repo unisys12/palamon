@@ -5,8 +5,8 @@ namespace Palamon\Destiny\Requests;
 class Items
 {
 
-    const ITEMS_URL = 'http://www.bungie.net/Platform/Destiny/Explorer/Items';
-    const ITEM_URL = 'http://www.bungie.net/platform/Destiny/Manifest/InventoryItem/';
+    private const ITEMS_URL = 'http://www.bungie.net/Platform/Destiny/Explorer/Items';
+    private const ITEM_URL = 'http://www.bungie.net/platform/Destiny/Manifest/InventoryItem/';
 
     public function getAllItems($parms)
     {
