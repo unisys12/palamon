@@ -48,11 +48,11 @@ class Manifest
         $result = $req->getBody();
 
         // Create zip archive to store data file
-        $zip = new ZipArchive;
+        $zip = new ZipArchive();
         $manifest = $zip->open('manifest' . date('mdY') . '.zip', ZipArchive::CREATE);
         file_put_contents($manifest, $result);
 
-        if ($zip->open($manifest) === TRUE) {
+        if ($zip->open($manifest) === true) {
             $zip->extractTo('./storage/destiny1/'); // update to directory outside of package
             $zip->close();
             unlink($manifest);

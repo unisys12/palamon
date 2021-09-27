@@ -63,7 +63,7 @@ class Manifest
      */
     public function getVersion()
     {
-        $manifest = self::getManifest();
+        $manifest = $this->getManifest();
         return $manifest['Response']['version'];
     }
 
@@ -72,9 +72,9 @@ class Manifest
      *
      * @return string
      */
-    private function _getJsonWorldContentPaths()
+    private function getJsonWorldContentPaths()
     {
-        $manifest = self::getManifest();
+        $manifest = $this->getManifest();
         return $manifest['Response']['jsonWorldContentPaths'][$this->lang];
     }
 
@@ -85,7 +85,7 @@ class Manifest
      */
     // public function downloadJSON()
     // {
-    //     $contentPath = self::_getJsonWorldContentPaths();
+    //     $contentPath = $this->getJsonWorldContentPaths();
 
     //     // NOTE: Extract our into seperate Service maybe?
     //     $client = new Client(
@@ -121,9 +121,9 @@ class Manifest
      *
      * @return string
      */
-    private function _getSQLiteContentPath()
+    private function getSQLiteContentPath()
     {
-        $manifest = self::getManifest();
+        $manifest = $this->getManifest();
         return $manifest['Response']['mobileWorldContentPaths'][$this->lang];
     }
 
@@ -132,10 +132,11 @@ class Manifest
      *
      * @return resource
      */
-    private function _downloadSql()
+    private function downloadSql()
     {
-        $contentPath = self::_getSQLiteContentPath();
-        // $contentPath = "/common/destiny2_content/sqlite/en/world_sql_content_336e2859ed44cbe84441ca18a05a2f35.content";
+        $contentPath = $this->getSQLiteContentPath();
+        // $contentPath =
+        //"/common/destiny2_content/sqlite/en/world_sql_content_336e2859ed44cbe84441ca18a05a2f35.content";
 
         // NOTE: Extract our into seperate Service maybe?
         $client = new Client(
@@ -176,9 +177,9 @@ class Manifest
      *
      * @return void
      */
-    private function _extractZip(string $path)
+    private function extractZip(string $path)
     {
-        $zip = new ZipArchive;
+        $zip = new ZipArchive();
         $zip->open($path);
         $zip->extractTo('./storage/destiny2/');
         $zip->close();
@@ -191,10 +192,10 @@ class Manifest
      */
     public function downloadMobileWorldContents()
     {
-        $sql = self::_downloadSql();
+        $sql = $this->downloadSql();
         $file = file_put_contents('./destiny2.zip', $sql);
 
-        $zip_contents = self::_extractZip('./destiny2.zip');
+        $zip_contents = $this->extractZip('./destiny2.zip');
 
         return $zip_contents;
     }
