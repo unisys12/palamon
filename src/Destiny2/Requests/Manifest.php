@@ -3,10 +3,10 @@
 namespace Palamon\Destiny2\Requests;
 
 use ZipArchive;
-use GuzzleHttp\Psr7;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Message;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * Handles the Destiny Manifest File
@@ -51,7 +51,7 @@ class Manifest
             return json_decode($req->getBody(), true);
         } catch (ClientException $ce) {
             if ($ce->hasResponse()) {
-                return Psr7\str($ce->getResponse());
+                return Message::toString($ce->getResponse());
             }
         }
     }
@@ -165,7 +165,7 @@ class Manifest
             return $req->getBody();
         } catch (ClientException $ce) {
             if ($ce->hasResponse()) {
-                return Psr7\str($ce->getResponse());
+                return Message::toString($ce->getResponse());
             }
         }
     }
