@@ -2,7 +2,7 @@
 
 namespace Palamon\Tests\Unit;
 
-use Palamon\Enums as Enums;
+use Palamon\Enums;
 use PHPUnit\Framework\TestCase;
 
 final class enumsTestCase extends TestCase
