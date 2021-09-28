@@ -1,4 +1,4 @@
-# Palamon
+# Palamon [![PHP Composer](https://github.com/unisys12/palamon/actions/workflows/php.yml/badge.svg?branch=main)](https://github.com/unisys12/palamon/actions/workflows/php.yml)
 
 This project is currently being rewritten so that I can hone my PHP chops, once again and get this package working with the latest version of the Bungie API as well as maintain backwards compatibility with the older API as well.
 
@@ -29,17 +29,16 @@ From here, you should be good to go. Bear in mind, I am still working on this, s
 ```php
 
 <?php
-
 // Load Composer Dependenices
 require __DIR__ . '/vendor/autoload.php';
 
-use \palamon\Destiny\Requests\Grimoire;
+use palamon\Destiny\Requests\Grimoire;
 
 // Load DotEnv to handle Enviroment Variables
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
-$grimoire = new Grimoire;
+$grimoire = new Grimoire();
 $cards = $grimoire->getGrimoire();
 
 $themes = $cards['Response']['themeCollection'];
@@ -58,7 +57,7 @@ Let's say, you want to download the compressed SQLite DB that contains all the s
 // Load Composer Dependenices
 require __DIR__ . '/vendor/autoload.php';
 
-use \palamon\Destiny\Requests\Manifest;
+use palamon\Destiny\Requests\Manifest;
 
 // Load DotEnv to handle Enviroment Variables
 $dotenv = new Dotenv\Dotenv(__DIR__);
@@ -81,7 +80,7 @@ So, let's say you want to display an single item from the Armory or from a Vendo
 // Load Composer Dependenices
 require __DIR__ . '/vendor/autoload.php';
 
-use \palamon\Destiny\Requests\Items;
+use palamon\Destiny\Requests\Items;
 
 // Load DotEnv to handle Enviroment Variables
 $dotenv = new Dotenv\Dotenv(__DIR__);
@@ -96,7 +95,7 @@ $item = $request->getSingleItem($key);
 ```
 
 ```php
-use \palamon\Destiny\Requests\Items;
+use palamon\Destiny\Requests\Items;
 
 $request = new Items();
 
@@ -112,45 +111,58 @@ This will give you a really good idea of what is included, which is a lot so...
 To access a list of all the Talent Nodes, you could do the following:
 
 ```php
-use \palamon\Destiny\Requests\TalentNodes;
+use palamon\Destiny\Requests\TalentNodes;
 
 $request = new TalentNodes();
 
 $talents = $request->getTalentNodes();
 
-echo "<h3>Talent Nodes</h3>";
+echo '<h3>Talent Nodes</h3>';
 var_dump($talents);
 
-echo "<ul>";
+echo '<ul>';
 foreach ($talents['Response']['data']['stepHashes'] as $talent) {
-	echo "<li>" . $talent . "</li>";
-};
-echo "</ul>";
+  echo '<li>' . $talent . '</li>';
+}
+echo '</ul>';
 
-echo "<p><b>" . count($talents['Response']['data']['stepHashes']) . "</b> out of <b>" . $talents['Response']['data']['totalResults'] . "</b></p>";
+echo '<p><b>' .
+  count($talents['Response']['data']['stepHashes']) .
+  '</b> out of <b>' .
+  $talents['Response']['data']['totalResults'] .
+  '</b></p>';
 ```
 
 But as you can see, this will only return a list of hashes. Not of great use. As with most of these, there are several Url Parameters we can pass to the method which will give us a bit more information. Like, so:
 
 ```php
-use \palamon\Destiny\Requests\TalentNodes;
+use palamon\Destiny\Requests\TalentNodes;
 
 $request = new TalentNodes();
 
 $talents = $request->getTalentNodes('definitions=true');
 
-echo "<h3>Talent Nodes</h3>";
+echo '<h3>Talent Nodes</h3>';
 var_dump($talents);
 
-echo "<dl>";
+echo '<dl>';
 foreach ($talents['Response']['data']['stepHashes'] as $talent) {
-	$talentHash = $talent;
-};
+  $talentHash = $talent;
+}
 
-foreach ($talents['Response']['definitions']['nodeSteps'] as $def){
-	echo "<dt>" . $talentHash . " - " . "<strong>" . $def['nodeStepName'] . "</strong>";
-	echo "<dd>" . $def['nodeStepDescription'];
-};
+foreach ($talents['Response']['definitions']['nodeSteps'] as $def) {
+  echo '<dt>' .
+    $talentHash .
+    ' - ' .
+    '<strong>' .
+    $def['nodeStepName'] .
+    '</strong>';
+  echo '<dd>' . $def['nodeStepDescription'];
+}
 
-echo "<p><b>" . count($talents['Response']['data']['stepHashes']) . "</b> out of <b>" . $talents['Response']['data']['totalResults'] . "</b></p>";
+echo '<p><b>' .
+  count($talents['Response']['data']['stepHashes']) .
+  '</b> out of <b>' .
+  $talents['Response']['data']['totalResults'] .
+  '</b></p>';
 ```
