@@ -26,7 +26,7 @@
     <logging>
         <junit outputFile="build/report.junit.xml"/>
         <text outputFile="build/coverage.txt"/>
-        <testdoxHtml outputFile="testdox.html"/>
-        <testdoxText outputFile="testdox.txt"/>
+        <testdoxHtml outputFile="build/testdox.html"/>
+        <testdoxText outputFile="build/testdox.txt"/>
     </logging>
 </phpunit>
