@@ -8,3 +8,4 @@ composer.lock
 index.php
 *.zip
 .phpunit.result.cache
+phpstan.neon
