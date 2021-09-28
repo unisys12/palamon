@@ -1,4 +1,4 @@
-# Palamon [![PHP Composer](https://github.com/unisys12/palamon/actions/workflows/php.yml/badge.svg?branch=main)](https://github.com/unisys12/palamon/actions/workflows/php.yml)
+# Palamon [![PHP Composer](https://github.com/unisys12/palamon/actions/workflows/php.yml/badge.svg?branch=main)](https://github.com/unisys12/palamon/actions/workflows/php.yml) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/unisys12/palamon)
 
 This project is currently being rewritten so that I can hone my PHP chops, once again and get this package working with the latest version of the Bungie API as well as maintain backwards compatibility with the older API as well.
 
