@@ -9,14 +9,11 @@ use function PHPUnit\Framework\assertCount;
 
 final class ManifestTestCase extends TestCase
 {
-    protected function setUp(): void
-    {
-        $this->manifest = new Manifest("en");
-    }
 
     public function testManifestIsReturned(): void
     {
-        $response = $this->manifest->getManifest();
+        $manifest = new Manifest("en");
+        $response = $manifest->getManifest();
 
         $this->assertCount("6", $response);
         $this->assertArrayHasKey("Response", $response);
@@ -24,11 +21,13 @@ final class ManifestTestCase extends TestCase
 
     public function testGetVersionReturnsAVersion()
     {
-        $this->assertIsString($this->manifest->getVersion());
+        $manifest = new Manifest("en");
+        $this->assertIsString($manifest->getVersion());
     }
 
     public function testJsonWorldContentPathsShouldReturnAString()
     {
-        $this->assertIsString($this->manifest->getJsonWorldContentPaths());
+        $manifest = new Manifest("en");
+        $this->assertIsString($manifest->getJsonWorldContentPaths());
     }
 }
