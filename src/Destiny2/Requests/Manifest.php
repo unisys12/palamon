@@ -23,7 +23,7 @@ class Manifest
      *
      * @param string $lang The language you wish to fetch
      */
-    public function __construct(string $lang)
+    public function __construct(protected string $lang)
     {
         $this->lang = $lang;
     }
