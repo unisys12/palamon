@@ -5,6 +5,7 @@ namespace Palamon\Destiny2\Requests;
 use ZipArchive;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Message;
+use Psr\Http\Message\StreamInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 
@@ -31,7 +32,7 @@ class Manifest
     /**
      * Fetches the Destiny 2 Manifest
      *
-     * @return array The response body of the manifest request
+     * @return string The response body of the manifest request
      */
     public function getManifest()
     {
@@ -130,7 +131,8 @@ class Manifest
     /**
      * Download MobileWorldContentFile (SQLite)
      *
-     * @return resource
+     * @throws ClientException
+     * @return StreamInterface
      */
     private function downloadSql()
     {
@@ -152,14 +154,14 @@ class Manifest
                 $contentPath,
                 [
                     'verify' => false,
-                    'progress' => function (
-                        $downloadTotal,
-                        $downloadedBytes
-                    ) {
-                        // I can do something with this info!
-                        // echo '<p>Download Total: ' . $downloadTotal . '</p>';
-                        // echo '<p>Download Bytes: ' . $downloadedBytes . '</p>';
-                    }
+                    // 'progress' => function (
+                    //     $downloadTotal,
+                    //     $downloadedBytes
+                    // ) {
+                    //     // I can do something with this info!
+                    //     echo '<p>Download Total: ' . $downloadTotal . '</p>';
+                    //     echo '<p>Download Bytes: ' . $downloadedBytes . '</p>';
+                    // }
                 ]
             );
             return $req->getBody();
@@ -175,14 +177,15 @@ class Manifest
      *
      * @param string $path Path to storage location of extract sqlite db
      *
-     * @return void
+     * @return bool
      */
     private function extractZip(string $path)
     {
         $zip = new ZipArchive();
         $zip->open($path);
         $zip->extractTo('./storage/destiny2/');
-        $zip->close();
+
+        return $zip->close();
     }
 
     /**
