@@ -16,7 +16,7 @@ use GuzzleHttp\Exception\RequestException;
 
 class Manifest
 {
-    private const MANIFEST_URL = "Manifest";
+    protected const MANIFEST_URL = "Manifest";
 
     /**
      * Requires use of a API Key obtained from Bungie.net

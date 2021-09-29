@@ -20,9 +20,9 @@ class Content
      *
      * @param string $path path to the SQLite DB
      */
-    public function __construct(string $path)
+    public function __construct(protected string $path)
     {
-        $this->path = $path;
+        //
     }
 
     /**
