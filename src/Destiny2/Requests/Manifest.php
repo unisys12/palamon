@@ -51,9 +51,7 @@ class Manifest
             );
             return json_decode($req->getBody(), true);
         } catch (ClientException $ce) {
-            if ($ce->hasResponse()) {
-                return Message::toString($ce->getResponse());
-            }
+            return Message::toString($ce->getResponse());
         }
     }
 
@@ -166,9 +164,7 @@ class Manifest
             );
             return $req->getBody();
         } catch (ClientException $ce) {
-            if ($ce->hasResponse()) {
-                return Message::toString($ce->getResponse());
-            }
+            return Message::toString($ce->getResponse());
         }
     }
 
