@@ -8,7 +8,7 @@ class Items
     private const ITEMS_URL = 'http://www.bungie.net/Platform/Destiny/Explorer/Items';
     private const ITEM_URL = 'http://www.bungie.net/platform/Destiny/Manifest/InventoryItem/';
 
-    public function getAllItems($parms)
+    public function getAllItems(string $params)
     {
 
         $client = new \GuzzleHttp\Client(['headers' => ['X-API-KEY' => $_ENV['BUNGIE_KEY']]]);
