@@ -2,6 +2,7 @@
 
 namespace Palamon\Destiny2\Requests;
 
+use Error;
 use ZipArchive;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Message;
@@ -63,7 +64,10 @@ class Manifest
     public function getVersion()
     {
         $manifest = $this->getManifest();
-        return $manifest['Response']['version'];
+        $version = !empty($manifest['Response']['version'])
+            ? $manifest['Response']['version']
+            : throw new Error('There was an issue retrieveing the version of the current manifest.');
+        return $version;
     }
 
     /**
@@ -74,7 +78,10 @@ class Manifest
     public function getJsonWorldContentPaths()
     {
         $manifest = $this->getManifest();
-        return $manifest['Response']['jsonWorldContentPaths'][$this->lang];
+        $path = !empty($manifest['Response']['jsonWorldContentPaths'][$this->lang])
+            ? $manifest['Response']['jsonWorldContentPaths'][$this->lang]
+            : throw new Error("There was an error fetching the json content path your requested.");
+        return $path;
     }
 
     /**
@@ -123,14 +130,17 @@ class Manifest
     private function getSQLiteContentPath()
     {
         $manifest = $this->getManifest();
-        return $manifest['Response']['mobileWorldContentPaths'][$this->lang];
+        $mobile_path = !empty($manifest['Response']['mobileWorldContentPaths'][$this->lang])
+            ? $manifest['Response']['mobileWorldContentPaths'][$this->lang]
+            : throw new Error("There was an error fetching the MobileWorldContent path you requested.");
+        return $mobile_path;
     }
 
     /**
      * Download MobileWorldContentFile (SQLite)
      *
      * @throws ClientException
-     * @return StreamInterface
+     * @return string
      */
     private function downloadSql()
     {
@@ -187,7 +197,7 @@ class Manifest
     /**
      * Extract the contents of the zipped manifest
      *
-     * @return resource
+     * @return bool
      */
     public function downloadMobileWorldContents()
     {
