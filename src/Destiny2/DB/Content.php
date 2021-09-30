@@ -2,6 +2,7 @@
 
 namespace Palamon\Destiny2\DB;
 
+use Exception;
 use PDO;
 use SQLite;
 
@@ -28,7 +29,7 @@ class Content
     /**
      * Makes connection to SQLite file
      *
-     * @return resource
+     * @return object
      */
     private function conn()
     {
@@ -44,13 +45,13 @@ class Content
     {
         $db = $this->conn();
 
-        $results = $db->query("SELECT * FROM main.sqlite_master WHERE type='table'", PDO::FETCH_COLUMN, 1);
+        $results = $db->query("SELECT * FROM main.sqlite_master WHERE type='tablle'", PDO::FETCH_COLUMN, 1);
 
         foreach ($results as $table) {
             $tableNames[] = $table;
         }
 
-        return $tableNames;
+        return $tableNames ??= print "Error with query to the contentfile: $results->queryString";
     }
 
     /**
@@ -70,6 +71,7 @@ class Content
             $tableContents[] = json_decode($row[1]);
         }
 
-        return $tableContents;
+        // @todo actually throw an exception. Throwing new Exception still returns a uncaught expection
+        return $tableContents ??= print "Error with query to the contentfile: $results->queryString";
     }
 }

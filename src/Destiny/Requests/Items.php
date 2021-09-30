@@ -12,7 +12,7 @@ class Items
     {
 
         $client = new \GuzzleHttp\Client(['headers' => ['X-API-KEY' => $_ENV['BUNGIE_KEY']]]);
-        $req = $client->request('GET', isset($params) ? self::ITEMS_URL . "?" . $params : self::ITEMS_URL);
+        $req = $client->request('GET', !empty($params) ? self::ITEMS_URL . "?" . $params : self::ITEMS_URL);
         $res = json_decode($req->getBody(), true);
 
         return $res;
