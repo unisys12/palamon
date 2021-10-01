@@ -18,7 +18,8 @@ use GuzzleHttp\Exception\RequestException;
 
 class Manifest
 {
-    protected const MANIFEST_URL = "Manifest";
+    protected const MANIFEST_URL = "Destiny2/Manifest/";
+    protected const BASE_URI = "https://www.bungie.net/Platform/";
 
     /**
      * Requires use of a API Key obtained from Bungie.net
@@ -40,8 +41,9 @@ class Manifest
 
         $client = new Client(
             [
-                'base_uri' => 'https://www.bungie.net/Platform/Destiny2/',
-                'headers' => ['X-API-KEY' => getenv('BUNGIE_KEY')],
+                'base_uri' => self::BASE_URI,
+                'headers' =>
+                ['X-API-KEY' => getenv("BUNGIE_KEY")],
             ]
         );
 
@@ -51,6 +53,98 @@ class Manifest
                 ['verify' => false]
             );
             return json_decode($req->getBody(), true);
+        } catch (ClientException $ce) {
+            return Message::toString($ce->getResponse());
+        }
+    }
+
+    /**
+     * Gets the current JSONContentPath
+     * VERY BIG DOWNLOAD!!
+     *
+     * @return string
+     */
+    public function getJsonWorldContentPaths()
+    {
+        $manifest = $this->getManifest();
+        $path = !empty($manifest['Response']['jsonWorldContentPaths'][$this->lang])
+            ? $manifest['Response']['jsonWorldContentPaths'][$this->lang]
+            : throw new Error("There was an error fetching the json content path your requested.");
+        return $path;
+    }
+
+    // Don't say I didn't warn you of the large download! >30MB of JSON
+    public function getAllJson()
+    {
+        $contentPath = $this->getJsonWorldContentPaths();
+
+        // NOTE: Extract our into seperate Service maybe?
+        $client = new Client(
+            [
+                'base_uri' => self::BASE_URI,
+                'headers' => ['X-API-KEY' => getenv('BUNGIE_KEY')],
+                'timeout' => 125
+            ]
+        );
+
+        try {
+            $req = $client->get(
+                $contentPath,
+                ['verify' => false, 'progress' => function (
+                    $downloadTotal,
+                    $downloadedBytes
+                ) {
+                    // I can do something with this info!
+                    // echo '<p>Download Total: ' . $downloadTotal . '</p>';
+                    // echo '<p>Download Bytes: ' . $downloadedBytes . '</p>';
+                }]
+            );
+            return json_decode($req->getBody());
+        } catch (ClientException $ce) {
+            return Message::toString($ce->getResponse());
+        }
+    }
+
+    /**
+     * Gets the path to a single table in JSON format
+     * Suited for most needs. Download only what you need
+     *
+     * @param string $table
+     *
+     * @return bool
+     */
+    public function getJsonTablePath(string $table)
+    {
+        $manifest = $this->getManifest();
+
+        $ComponentContentPath = !empty($manifest['Response']["jsonWorldComponentContentPaths"][$this->lang][$table])
+            ? $manifest['Response']["jsonWorldComponentContentPaths"][$this->lang][$table]
+            : print throw new Error("There was an issue fetching the JSON data for the table " . $table);
+
+        return $ComponentContentPath;
+    }
+
+    /**
+     * Returns JSON for a given jsonWorldComponentContentPath
+     *
+     * @param string $tablename
+     * @return string
+     */
+    public function getJsonContent(string $tablename)
+    {
+        $path = $this->getJsonTablePath($tablename);
+
+        $client = new Client(
+            [
+                'base_uri' => self::BASE_URI,
+                'headers' => ['X-API-KEY' => getenv('BUNGIE_KEY')],
+                'timeout' => 125
+            ]
+        );
+
+        try {
+            $req = $client->get($path, ['verify' => false]);
+            return json_decode($req->getBody());
         } catch (ClientException $ce) {
             return Message::toString($ce->getResponse());
         }
@@ -69,58 +163,6 @@ class Manifest
             : throw new Error('There was an issue retrieveing the version of the current manifest.');
         return $version;
     }
-
-    /**
-     * Gets the current JSONContentPath
-     *
-     * @return string
-     */
-    public function getJsonWorldContentPaths()
-    {
-        $manifest = $this->getManifest();
-        $path = !empty($manifest['Response']['jsonWorldContentPaths'][$this->lang])
-            ? $manifest['Response']['jsonWorldContentPaths'][$this->lang]
-            : throw new Error("There was an error fetching the json content path your requested.");
-        return $path;
-    }
-
-    /**
-     * Download JSONWorldContent
-     *
-     * @return resource
-     */
-    // public function downloadJSON()
-    // {
-    //     $contentPath = $this->getJsonWorldContentPaths();
-
-    //     // NOTE: Extract our into seperate Service maybe?
-    //     $client = new Client(
-    //         [
-    //             'base_uri' => 'https://www.bungie.net/Platform/',
-    //             'headers' => ['X-API-KEY' => $this->key],
-    //             'timeout' => 125
-    //         ]
-    //     );
-
-    //     try {
-    //         $req = $client->get(
-    //             $contentPath, ['verify' => false, 'progress' => function (
-    //                 $downloadTotal,
-    //                 $downloadedBytes
-    //             ) {
-    //                 // I can do something with this info!
-    //                 // echo '<p>Download Total: ' . $downloadTotal . '</p>';
-    //                 // echo '<p>Download Bytes: ' . $downloadedBytes . '</p>';
-    //             }]
-    //         );
-    //         return json_decode($req->getBody());
-    //     } catch (ClientException $ce) {
-    //         if ($ce->hasResponse()) {
-    //             return Psr7\str($ce->getResponse());
-    //         }
-    //     }
-
-    // }
 
     /**
      * Get the current SQLite3 Content Path
@@ -151,7 +193,7 @@ class Manifest
         // NOTE: Extract our into seperate Service maybe?
         $client = new Client(
             [
-                'base_uri' => 'https://www.bungie.net/Platform/',
+                'base_uri' => self::BASE_URI,
                 'headers' => ['X-API-KEY' => getenv('BUNGIE_KEY')],
                 'timeout' => 125
             ]
